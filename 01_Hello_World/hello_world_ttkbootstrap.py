@@ -12,15 +12,9 @@ def mostrar_nome():
 
 janela = tk.Window(themename= "superhero")
 
-menu = 
-
-
 
 #Colocar Titulo
 janela.title("Janela")
-label_etiqueta = tk.Label(janela,
-                          text="HelloWorld.org")
-label_etiqueta.pack()
 
 
 #Essa é a variavel para a caixa do "Digite seu nome"
@@ -32,7 +26,7 @@ label_nome.place(x=350,
 
 #cria a parte para voce digitar seu nome
 campo_nome = tk.Entry(janela)
-campo_nome.place(x=331,
+campo_nome.place(x=340,
                  y=320)
 
 
@@ -40,29 +34,27 @@ campo_nome.place(x=331,
 botao_enviar = tk.Button(janela, 
                          text="enviar", 
                          command=mostrar_nome)
-botao_enviar.place(x=369,
-                   y=359)
+botao_enviar.place(x=375,
+                   y=343)
 
 
 #cria a parte em que vai aparecer seu nome
-label_resultado = tk.Label(janela, 
-                           text="",
-                           font=("Cambria", 16))
-label_resultado.place(x=342,
-                      y=398)
+label_resultado = tk.Label(janela, text="")
+label_resultado.place(x=365,
+                      y=378)
 
 
 #caixa de texto
 label_titulo = tk.Label(janela, 
-                        text="Bem Vindo", 
+                        text="Oi ne", 
                         font=("Arial", 16))
-label_titulo.place(x=342, 
+label_titulo.place(x=370, 
                    y=260)
 
 
 
 #Colocar Cores
-
+janela.configure(bg="#FACADA")
 
 #Definir o tamanho da janela e a posição inicial 
 janela.geometry("800x600+100+50")

@@ -12,7 +12,7 @@ def mostrar_nome():
 
 janela = tk.Tk()
 
-janela.state('zoomed')
+
 #Colocar Titulo
 janela.title("Janela")
 
