@@ -20,8 +20,8 @@ janela.title("Janela")
 #Essa é a variavel para a caixa do "Digite seu nome"
 label_nome = tk.Label(janela, 
                       text="Digite seu nome:")
-label_nome.place(x=350,
-                 y=300)
+label_nome.place(x=358,
+                 y=300,)
 
 
 #cria a parte para voce digitar seu nome
@@ -35,13 +35,15 @@ botao_enviar = tk.Button(janela,
                          text="enviar", 
                          command=mostrar_nome)
 botao_enviar.place(x=375,
-                   y=343)
+                   y=360)
 
 
 #cria a parte em que vai aparecer seu nome
-label_resultado = tk.Label(janela, text="")
-label_resultado.place(x=365,
-                      y=378)
+label_resultado = tk.Label(janela, 
+                           text="",
+                           font=("Cambria", 15))
+label_resultado.place(x=358,
+                      y=400)
 
 
 #caixa de texto
@@ -54,7 +56,7 @@ label_titulo.place(x=370,
 
 
 #Colocar Cores
-janela.configure(bg="#FACADA")
+
 
 #Definir o tamanho da janela e a posição inicial 
 janela.geometry("800x600+100+50")
