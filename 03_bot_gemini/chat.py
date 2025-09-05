@@ -36,14 +36,18 @@ class Chat():
                                  style="outline button")
         self.janela_botao.pack(padx= 30, pady=5)
 
-        label_resposta = ttk.Label(self.janela,
+        self.label_resposta = ttk.Label(self.janela,
                                    text="resposta",
                                    style= "success")
-        label_resposta.pack(pady=(20,0))
+        self.label_resposta.pack(pady=(20,0))
+
+        self.robo = Bot()
 
 def responder(self):
     pergunta = self.janela_entrada.get()
-    robo = Bot()
+    resposta = self.robo.enviar_mensagem(pergunta)
+    self.label_resposta.config(text=resposta)
+
         
 
 def run(self):
