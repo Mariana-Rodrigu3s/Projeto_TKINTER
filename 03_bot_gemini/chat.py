@@ -20,9 +20,8 @@ class Chat():
         self.janela_etiqueta.pack()
 
         #parte para colocar o texto
-        self.janela_nome= ttk.Label(self.janela,
+        self.janela_nome= ttk(self.janela,
                             text="Sra. Isadora Leclair responde:",
-                            font= "Arial",
                             style= "info")
         self.janela_nome.pack(padx=20, pady=10)
 
@@ -33,25 +32,36 @@ class Chat():
         #button para criar um botão 
         self.janela_botao = ttk.Button(self.janela,
                                  text= "responder",
-                                 style="outline button")
+                                 style="outline button",
+                                 command=self.responder)
         self.janela_botao.pack(padx= 30, pady=5)
 
         self.label_resposta = ttk.Label(self.janela,
-                                   text="resposta",
+                                   text="",
                                    style= "success")
         self.label_resposta.pack(pady=(20,0))
 
-        self.robo = Bot()
-
-def responder(self):
-    pergunta = self.janela_entrada.get()
-    resposta = self.robo.enviar_mensagem(pergunta)
-    self.label_resposta.config(text=resposta)
-
+        self.st = ttk.ScrolledText(self.janela,
+                                   height=10,
+                                   wrap="word")
+        
+        self.st.pack(pady=10, padx=10, fill="word")
         
 
-def run(self):
-    self.janela.mainloop()
+        self.robo = Bot()
+
+    def responder(self):
+        pergunta = self.janela_entrada.get()
+        resposta = self.robo.enviar_mensagem(pergunta)
+        self.label_resposta.config(text=resposta)
+
+        
+        self.st.delete("1.0", ttk.END)
+        self.st.insert("1.0", resposta)
+
+
+    def run(self):
+        self.janela.mainloop()
 
 
 
