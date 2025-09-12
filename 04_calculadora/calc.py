@@ -65,11 +65,15 @@ class Calc:
             peso = float(self.e1.get())
             altura = float(self.e2.get())
             imc = peso / (altura ** 2)
-        except:
+        except ValueError:
             messagebox.showerror("Erro", "Porfavor, insira valores válidos")
+        except ZeroDivisionError:
+            messagebox.showerror("Erro", "O valor não pode ser 0")
+        except:
+            messagebox.showerror("Erro", "Erro")
  
 
-        imc = round(imc, 2)
+  
         
 
         if imc < 18.5:
