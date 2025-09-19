@@ -19,7 +19,7 @@ class Janela_Principal:
         #Impede que o usuário redimensione a tela 
         self.janela.resizable(False,
                         False)
-        self.janela.state('zoomed')
+        self.janela.state()
 
 
 
