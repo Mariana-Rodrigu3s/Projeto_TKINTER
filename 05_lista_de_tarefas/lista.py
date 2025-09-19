@@ -43,8 +43,8 @@ class Login:
         botoes = ttk.Frame()
         botoes.pack()
 
-        ttk.Button(botoes, text="LOGIN", style= "outline button", command=self.validar).pack(side="left", padx=10)
-        ttk.Button(botoes, text="SAIR", style= "outline button", command=self.confirmar).pack(side="right", padx=10)
+        ttk.Button(botoes, text="LOGIN", style= "outline button", command=self.logar).pack(side="left", padx=10)
+        ttk.Button(botoes, text="SAIR", style= "outline button", command=self.sair).pack(side="right", padx=10)
 
          
 
@@ -52,7 +52,7 @@ class Login:
         
 
         #Def para validar a senha e ver se está correta ou não 
-    def validar(self):
+    def logar(self):
          login = self.login.get()
          senha = self.senha.get()
 
@@ -63,7 +63,7 @@ class Login:
               messagebox.showerror("Erro","Login e Senha incorretos, tente novamente!")
          
          #Def para perguntar se realmente quer sair da janela 
-    def confirmar(self):
+    def sair(self):
          resposta = messagebox.askyesno("Confirmação", "Tem certeza que deseja sair?")
          if resposta:
               self.janela.destroy()
