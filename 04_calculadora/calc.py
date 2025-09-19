@@ -59,6 +59,8 @@ class Calc:
                             text="")
         self.resultado.place(x=310,
                         y=320)
+        
+
     def resultados1(self):
 
         try:
