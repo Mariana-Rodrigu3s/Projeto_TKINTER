@@ -1,0 +1,4 @@
+para mudar o estilo: python -m ttkbootstrap
+
+importar o ttk: pip install ttkbootstrap
+
