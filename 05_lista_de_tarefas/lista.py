@@ -79,7 +79,7 @@ class Lista:
         if concluido:
             item = self.list.get(concluido)
 
-            novo_item = item + " Concluído"
+            novo_item = item + " [✓]"
 
             self.list.delete(concluido)
             self.list.insert(concluido, novo_item)

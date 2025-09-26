@@ -1,6 +1,7 @@
 import ttkbootstrap as ttk
 from tkinter import messagebox
 from lista import Lista
+import sqlite3
 
 class Login:
     def __init__(self):
