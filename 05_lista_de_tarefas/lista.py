@@ -1,5 +1,5 @@
 import ttkbootstrap as ttk
-
+from tkinter import messagebox
 from tkinter import Listbox, END
 
 
@@ -51,7 +51,8 @@ class Lista:
 
         feito = ttk.Button(frame_botao, 
                            text="Feito", 
-                           style="outline button")
+                           style="outline button",
+                           command=self.marcar_concluido)
         feito.pack(side="right", 
                    padx=20)
 
@@ -67,9 +68,25 @@ class Lista:
 
         if selecionado:
             self.list.delete(selecionado)
-
         
+        else:
+            messagebox.showerror(message="Selecione um item da lista para excluir!")
+            
 
+    def marcar_concluido(self):
+        concluido = self.list.curselection()
+
+        if concluido:
+            item = self.list.get(concluido)
+
+            novo_item = item + " Concluído"
+
+            self.list.delete(concluido)
+            self.list.insert(concluido, novo_item)
+    
+
+        else:
+            messagebox.showerror(message="Selecione um item para concluir")
 
 
     def run(self):

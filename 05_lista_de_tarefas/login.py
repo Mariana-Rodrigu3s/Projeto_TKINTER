@@ -59,7 +59,7 @@ class Login:
          senha = self.senha.get()
 
 
-         if login == "mariana" and senha == "1107":
+         if login == "mari" and senha == "1107":
               messagebox.showinfo("Bem vindo!", "Login e Senha Corretos!")
               self.janela.destroy()
               tarefa = Lista()
