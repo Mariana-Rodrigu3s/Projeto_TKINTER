@@ -79,6 +79,8 @@ class Lista:
         conexao.close()
 
 
+        self.atualizar()
+
 
         def atualizar(self):
             conexao = sqlite3.connect("05_lista_de_tarefas/bdlista.sqlite")
@@ -135,6 +137,15 @@ class Lista:
         
         else:
             messagebox.showerror(message="Selecione um item da lista para excluir!")
+
+        conexao = sqlite3.connect("05_lista_de_tarefas/bdlista.sqlite")
+        cursor = conexao.cursor()
+
+        exclua = """
+                DELETE FROM tarefa WHERE tarefa
+"""
+        
+        
             
 
     def marcar_concluido(self):
