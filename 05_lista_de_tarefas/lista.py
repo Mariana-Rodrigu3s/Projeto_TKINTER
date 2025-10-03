@@ -79,6 +79,23 @@ class Lista:
         conexao.close()
 
 
+
+        def atualizar(self):
+            conexao = sqlite3.connect("05_lista_de_tarefas/bdlista.sqlite")
+            cursor = conexao.cursor()
+
+            selecionar = """
+                        SELECT id, tarefa FROM tarefa;
+                        """
+
+            lista = cursor.fetchall()
+            cursor.execute(selecionar)
+
+            cursor.close()
+            conexao.close()
+
+            for linha in lista:
+                self.list.insert("end", linha[1])
         
 
         
@@ -105,6 +122,8 @@ class Lista:
 
         cursor.close()
         conexao.close()
+
+        
         
 
     
@@ -140,4 +159,7 @@ class Lista:
 
 if __name__ == "__main__":
     lista = Lista()
-    lista.janela.mainloop()
+    lista.run()
+    
+    
+    
