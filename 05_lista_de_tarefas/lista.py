@@ -1,6 +1,8 @@
 import ttkbootstrap as ttk
 from tkinter import messagebox
 from tkinter import Listbox, END
+import sqlite3
+
 
 
 
@@ -55,12 +57,55 @@ class Lista:
                            command=self.marcar_concluido)
         feito.pack(side="right", 
                    padx=20)
+        
+
+        conexao = sqlite3.connect("05_lista_de_tarefas/bdlista.sqlite")
+
+        
+
+        cursor = conexao.cursor()
+
+        tabela = """
+                        CREATE TABLE IF NOT EXISTS tarefa(
+                       id INTEGER PRIMARY KEY AUTOINCREMENT,
+                       tarefa VARCHAR(200));
+                """
+
+        cursor.execute(tabela)
+
+        conexao.commit()
+
+        cursor.close()
+        conexao.close()
+
+
+        
+
+        
 
 
     def adicionar_tarefa(self):
         tarefa = self.tarefa.get()
         self.list.insert(END, 
                          tarefa)
+        
+        conexao = sqlite3.connect("05_lista_de_tarefas/bdlista.sqlite")
+        cursor = conexao.cursor()
+
+        insert = """
+                INSERT INTO tarefa(tarefa)
+                VALUES(?)
+"""
+
+
+
+        cursor.execute(insert,[tarefa])
+
+        conexao.commit()
+
+        cursor.close()
+        conexao.close()
+        
 
     
     def excluir_item(self):
