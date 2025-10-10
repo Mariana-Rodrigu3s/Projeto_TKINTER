@@ -79,7 +79,7 @@ class Lista:
         conexao.close()
 
 
-        self.atualizar()
+        
 
 
         def atualizar(self):
@@ -162,6 +162,19 @@ class Lista:
 
         else:
             messagebox.showerror(message="Selecione um item para concluir")
+
+
+        conexao = sqlite3.connect("05_lista_de_tarefas/bdlista.sqlite")
+        cursor = conexao.cursor()
+
+        marcar = """
+                UPDATE tarefa
+                SET novo_item = concluido
+                WHERE tarefa 
+"""
+
+        cursor.execute(marcar)
+        conexao.commit()
 
 
     def run(self):
