@@ -39,10 +39,8 @@ class Cadastro:
         self.senha.pack(pady=(0,20))
 
 
-        self.button = ttk.Label(self.janela,
-                                text="Cadastrar",
-                                style="outline button")
-        self.button.pack(pady=(0,20))
+        ttk.Button(self.janela, text="LOGIN", style="outline button", command=self.inserr).pack(pady=(0,20))
+
 
         self.criar_tabela()
 
@@ -92,9 +90,10 @@ class Cadastro:
                     ?,
                     ?)
                             """,
-                            (nome, 
+                            [nome, 
                              usuario,
-                             senha))
+                             senha]
+                        )
              
              conexao.commit()
              conexao.close()
