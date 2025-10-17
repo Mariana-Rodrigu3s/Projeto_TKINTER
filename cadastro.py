@@ -1,5 +1,5 @@
 import ttkbootstrap as ttk
-from tkinter import messagebox
+import sqlite3
 
 class Cadastro:
     def __init__(self):
@@ -39,6 +39,69 @@ class Cadastro:
         self.senha.pack(pady=(0,20))
 
 
+        self.button = ttk.Label(self.janela,
+                                text="Cadastrar",
+                                style="outline button")
+        self.button.pack(pady=(0,20))
+
+        self.criar_tabela()
+
+
+        def criar_tabela(self):
+             #conectando ao banco de dados 
+             conexao = sqlite3.connect("./bdlista.sqlite")
+
+             #criar cursor
+             cursor = conexao.cursor()
+
+
+             #executando o comando 
+
+             cursor.execute("""
+                            CREATE TABLE IF NOT EXISTS usuario(
+                                nome VARCHAR(80), 
+                                usuario VARCHAR(20) PRIMARY KEY,
+                                senha VARCHAR(20)
+                            );
+                            """)
+             
+             #comito a transação
+             conexao.commit()
+
+            
+            #encerro a conexao
+             conexao.close()
+
+
+        def inserir(self):
+             conexao = sqlite3.connect("./bdlista.sqlite")
+
+             cursor = conexao.cursor()
+
+             nome = self.logi.get()
+             usuario = self.login.get()
+             senha = self.senha.get()
+
+             cursor.execute("""
+                        INSERT INTO usuario
+                    (nome,
+                    usuario,
+                    senha)
+                VALUES
+                    (?,
+                    ?,
+                    ?)
+                            """,
+                            (nome, 
+                             usuario,
+                             senha))
+             
+             conexao.commit()
+             conexao.close()
+
+        
+
+
 
 
 
@@ -61,5 +124,10 @@ def run(self):
 
 
 if __name__ == "__main__":
-    cadastro = Cadastro(ttk.Window())
-    cadastro.run()
+    login = Cadastro()
+    login.janela.mainloop()
+
+
+
+
+    
