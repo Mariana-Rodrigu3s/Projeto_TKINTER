@@ -1,6 +1,9 @@
 import ttkbootstrap as ttk
 from tkinter import messagebox
 from lista import Lista
+from cadastro import Cadastro
+import sqlite3
+
 import sqlite3
 
 class Login:
@@ -41,6 +44,8 @@ class Login:
         self.senha = ttk.Entry(self.janela, show="*")
         self.senha.pack(pady=(0,20))
 
+        
+
 
         #Botao de logar
         botoes = ttk.Frame()
@@ -48,16 +53,35 @@ class Login:
 
         ttk.Button(botoes, text="LOGIN", style= "outline button", command=self.logar).pack(side="left", padx=10)
         ttk.Button(botoes, text="SAIR", style= "outline button", command=self.sair).pack(side="right", padx=10)
+        ttk.Button(botoes, text="CADASTRAR", style= "outline button", command=self.cadastrar).pack(side="right", padx=10)
 
         
 
-        
+    def run(self):
+        self.janela.mainloop()   
+
+    def cadastrar(self):
+         Cadastro(self.janela)
         
 
         #Def para validar a senha e ver se está correta ou não 
     def logar(self):
          login = self.login.get()
          senha = self.senha.get()
+
+         conexao = sqlite3.connect("./bdlista.sqlite")
+
+         cursor = conexao.cursor()
+
+         cursor.execute(
+              """
+              SELECT nome, usuario FROM usuario
+              WHERE usuario = "lelex" AND senha = "1234";
+
+              """,
+              [login, senha]
+         )
+
 
 
          if login == "mari" and senha == "1107":
@@ -75,6 +99,12 @@ class Login:
          resposta = messagebox.askyesno("Confirmação", "Tem certeza que deseja sair?")
          if resposta:
               self.janela.destroy()
+
+
+    
+    
+
+
     
 
         
@@ -85,8 +115,7 @@ class Login:
 
 
 
-    def run(self):
-        self.janela.mainloop()
+    
 
 
 
