@@ -9,7 +9,7 @@ import sqlite3
 class Lista:
     def __init__(self):
 
-        self.janela = ttk.Window(title= "Lista de Tarefas", themename= "morph")
+        self.janela = ttk.Window(title= "Lista de Tarefas", themename= "minty")
         self.janela.geometry("800x600")
         self.janela.resizable(False,False)
         self.janela.iconbitmap("05_lista_de_tarefas/download.ico")

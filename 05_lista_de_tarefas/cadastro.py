@@ -4,10 +4,10 @@ from tkinter import messagebox
 
 
 class Cadastro:
-    def __init__(self):
+    def __init__(self, janela_pai):
         
 
-        self.janela = ttk.Window(title="Cadastro", themename="minty")
+        self.janela = ttk.Toplevel(janela_pai)
         self.janela.geometry("800x600")
         self.janela.resizable(False,
                               False)
@@ -128,7 +128,7 @@ def run(self):
 
 
 if __name__ == "__main__":
-    login = Cadastro()
+    login = Cadastro("jdkfs")
     login.janela.mainloop()
 
 

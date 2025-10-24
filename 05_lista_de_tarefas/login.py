@@ -7,7 +7,9 @@ import sqlite3
 import sqlite3
 
 class Login:
-    def __init__(self):
+    def __init__(self, janela_pai):
+        
+        self.janela_pai = janela_pai
         
 
 
@@ -15,14 +17,13 @@ class Login:
     #senha : entry()
 
 
-        self.janela = ttk.Window(title="Login", themename= "minty")
+        self.janela = ttk.Toplevel(janela_pai)
         self.janela.geometry("800x600")
         self.janela.resizable(False,
                               False)
         self.janela.iconbitmap("05_lista_de_tarefas/pinkiepie.ico")
         
-        frame = ttk.Frame()
-        frame.pack()
+        
         
         #Login
         ttk.Label(self.janela,
@@ -45,15 +46,24 @@ class Login:
         self.senha.pack(pady=(0,20))
 
         
+        self.frame_botao = ttk.Frame(self.janela)
+        self.frame_botao.pack()
 
 
-        #Botao de logar
-        botoes = ttk.Frame()
-        botoes.pack()
+        ttk.Button(self.frame_botao,
+                   text="LOGIN",
+                   style="outline button",
+                   command=self.logar).pack(side="left",padx=10)
+        ttk.Button(self.frame_botao,
+                   text="SAIR",
+                   style="outline button",
+                   command=self.sair).pack(side="right",padx=10)
+        
+        ttk.Button(self.janela,
+                   text="CADASTRAR",
+                   style = "outline button",
+                   command=self.cadastrar).pack(padx=15, pady=10)
 
-        ttk.Button(botoes, text="LOGIN", style= "outline button", command=self.logar).pack(side="left", padx=10)
-        ttk.Button(botoes, text="SAIR", style= "outline button", command=self.sair).pack(side="right", padx=10)
-        ttk.Button(botoes, text="CADASTRAR", style= "outline button", command=self.cadastrar).pack(side="right", padx=10)
 
         
 
@@ -62,7 +72,12 @@ class Login:
 
     def cadastrar(self):
          Cadastro(self.janela)
-        
+    
+    
+    def sair(self):
+         resposta = messagebox.askyesno("Confirmação", "Tem certeza que deseja sair?")
+         if resposta == True:
+              exit()  
 
         #Def para validar a senha e ver se está correta ou não 
     def logar(self):
@@ -76,29 +91,29 @@ class Login:
          cursor.execute(
               """
               SELECT nome, usuario FROM usuario
-              WHERE usuario = "lelex" AND senha = "1234";
+              WHERE usuario = ? AND senha = ?;
 
               """,
               [login, senha]
          )
 
+         resultado = cursor.fetchone()
+
+         conexao.close()
 
 
-         if login == "mari" and senha == "1107":
-              messagebox.showinfo("Bem vindo!", "Login e Senha Corretos!")
+
+         if resultado:
+              messagebox.showinfo("Login e Senha Corretos!", message=f"Bem vindo, {resultado[0]}!!")
               self.janela.destroy()
-              tarefa = Lista()
-              tarefa.run()
+              
               
 
          else: 
               messagebox.askretrycancel("Erro","Login e Senha incorretos, tente novamente!")
          
          #Def para perguntar se realmente quer sair da janela 
-    def sair(self):
-         resposta = messagebox.askyesno("Confirmação", "Tem certeza que deseja sair?")
-         if resposta:
-              self.janela.destroy()
+    
 
 
     
@@ -121,5 +136,5 @@ class Login:
 
 
 if __name__ == "__main__":
-        login = Login()
+        login = Login("jajs")
         login.janela.mainloop()
