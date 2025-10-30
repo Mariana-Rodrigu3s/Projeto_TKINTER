@@ -11,6 +11,7 @@ class Cadastro:
         self.janela.geometry("800x600")
         self.janela.resizable(False,
                               False)
+        self.janela.iconbitmap("05_lista_de_tarefas/download.ico")
         
         frame = ttk.Frame()
         frame.pack()

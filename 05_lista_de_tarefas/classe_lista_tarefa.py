@@ -1,13 +1,17 @@
 import ttkbootstrap as ttk
 from tkinter import messagebox
 from tkinter import Listbox, END
+from login import Login
 import sqlite3
 
 
 
 
-class Lista:
+class Janela_Lista_Tarefas:
     def __init__(self):
+
+        #usuario que está logado
+        self.logado = None
 
         self.janela = ttk.Window(title= "Lista de Tarefas", themename= "minty")
         self.janela.geometry("800x600")
@@ -68,7 +72,9 @@ class Lista:
         tabela = """
                         CREATE TABLE IF NOT EXISTS tarefa(
                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                       tarefa VARCHAR(200));
+                       tarefa VARCHAR(200),
+                       usuario VARCHAR(20)
+                       );
                 """
 
         cursor.execute(tabela)
@@ -78,20 +84,26 @@ class Lista:
         cursor.close()
         conexao.close()
 
+        Login(self)
+
+        
+
+        self.atualizar()
+
 
         
 
 
-        def atualizar(self):
+    def atualizar(self):
             conexao = sqlite3.connect("05_lista_de_tarefas/bdlista.sqlite")
             cursor = conexao.cursor()
 
             selecionar = """
-                        SELECT id, tarefa FROM tarefa;
+                        SELECT id, tarefa FROM tarefa WHERE usuario = ?;
                         """
 
             lista = cursor.fetchall()
-            cursor.execute(selecionar)
+            cursor.execute(selecionar,[self.logado])
 
             cursor.close()
             conexao.close()
@@ -112,13 +124,13 @@ class Lista:
         cursor = conexao.cursor()
 
         insert = """
-                INSERT INTO tarefa(tarefa)
-                VALUES(?)
+                INSERT INTO tarefa(tarefa, usuario)
+                VALUES(?, ?)
 """
 
 
 
-        cursor.execute(insert,[tarefa])
+        cursor.execute(insert,[tarefa, self.logado])
 
         conexao.commit()
 
@@ -182,8 +194,6 @@ class Lista:
     
 
 if __name__ == "__main__":
-    lista = Lista()
-    lista.run()
-    
-    
+    lista = Janela_Lista_Tarefas()
+    lista.janela.mainloop()
     

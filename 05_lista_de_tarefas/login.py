@@ -1,15 +1,16 @@
 import ttkbootstrap as ttk
 from tkinter import messagebox
-from lista import Lista
+from classe_lista_tarefa import Janela_Lista_Tarefas
 from cadastro import Cadastro
 import sqlite3
 
 import sqlite3
 
 class Login:
-    def __init__(self, janela_pai):
+    def __init__(self, classe_pai):
         
-        self.janela_pai = janela_pai
+        self.janela_pai = classe_pai.janela
+        self.classe_pai = classe_pai
         
 
 
@@ -17,7 +18,7 @@ class Login:
     #senha : entry()
 
 
-        self.janela = ttk.Toplevel(janela_pai)
+        self.janela = ttk.Toplevel(self.janela_pai)
         self.janela.geometry("800x600")
         self.janela.resizable(False,
                               False)
@@ -106,6 +107,12 @@ class Login:
          if resultado:
               messagebox.showinfo("Login e Senha Corretos!", message=f"Bem vindo, {resultado[0]}!!")
               self.janela.destroy()
+              self.janela_pai.deiconify()
+
+              #estou enviando para a janela de tarefas qual o usuario que logou
+              self.classe_pai.logado = login
+               #atualizando a lista de tarefas
+              self.classe_pai.atualizar()
               
               
 
